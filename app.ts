@@ -1,20 +1,42 @@
-class Perguntas{
-    protected nome:string
-    protected idade:number
-    protected estudoLinguagem: string
-    constructor(nome:string, idade:number, estudoLinguagem:string){
-        this.nome = nome;
-        this.idade = idade;
-        this.estudoLinguagem = estudoLinguagem;
-    };
+//Criando as funções:
 
-    public chamarUser():any {
-        return(`Olá ${this.nome}, você tem ${this.idade} anos e já está aprendendo ${this.estudoLinguagem}!`)
-    };
+
+
+//Função:
+function gerarMsg():void{
+    const nome:HTMLInputElement = document.querySelector('#area') as HTMLInputElement;
+    const msg:HTMLParagraphElement = document.getElementById('texto') as HTMLParagraphElement;
+    if(nome.value === "Front-End"){
+        msg.innerHTML = `Ok, você quer aprender ${nome.value}, mas qual das seguintes linguagens de programação ou frame-work você pretende aprender?`
+        const selecao:HTMLSelectElement = document.getElementById('lingaugens') as HTMLSelectElement;
+        selecao.innerHTML = '<option value="default">React</option><br> <option value="default">Vue</option>'
+    } else if(nome.value === "Back-End"){
+        msg.innerHTML = `Ok, você quer aprender ${nome.value}, mas qual das seguintes linguagens de programação ou frame-work você pretende aprender?`
+        const selecao:HTMLSelectElement = document.getElementById('lingaugens') as HTMLSelectElement;
+        selecao.innerHTML = '<option value="default">C#</option><br> <option value="default">Java</option>'
+    }
 };
 
+//Criando a função para perguntar se a pessoa quer ou não se especiliazar na sua área.
 
-class Pessoa extends Perguntas{};
-const pessoa1 = new Pessoa("Gabriel", 14, "TypeScript");
-console.log(pessoa1.chamarUser());
+function section():void{
+    const section:HTMLSelectElement = document.getElementById('especializar') as HTMLSelectElement;
+    section.innerHTML = '<option value="default">Continuar na minha área</option><br><option value="default">Virar Full-Stack</option>'
+};
 
+//Criando a função para a pessoa escolher qual tecnologia ela quer se especializar ou aprender:
+function ling():void{
+    const input:HTMLDivElement = document.getElementById('divinput') as HTMLDivElement;
+    input.innerHTML = ('<p> Digite a lingaugem que você quer aprender os se especializar: <br><input type="text" placeholder="Digite a tecnologia" required>')
+}
+
+
+
+const form:HTMLElement = document.getElementById('form') as HTMLFormElement;
+
+form.addEventListener('submit', x=> {
+    x.preventDefault()
+    gerarMsg();
+    section();
+    ling();
+});
